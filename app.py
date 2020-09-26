@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, session, g
-import model
+import model, admin_model
 
 app = Flask(__name__)
 app.secret_key = 'keepitsecret'
 
+admin_username = ''
 username = ''
 user = model.check_users()
 
@@ -12,6 +13,8 @@ def before_request():
     g.username = None
     if 'username' in session:
         g.username = session['username']
+    if 'admin_username' in session:
+        g.admin_username = session['admin_username']
 
 @app.route('/', methods=['GET'])
 def index():
@@ -118,6 +121,36 @@ def editItem(list_name, item_name):
         return redirect('/list/{list_name}'.format(list_name=list_name))
     return render_template('editItem.html', list_name=list_name, item_name=item_name)
 
+@app.route('/login/admin', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        session.pop('admin_username', None)
+        username = request.form['username']
+        password = admin_model.check_passwd(username)
+        if request.form['password'] == password:
+            session['admin_username'] = request.form['username']
+            return redirect(url_for('admin_dashboard'))
+        else:
+            return render_template('admin_login.html', message='Login Failed!')
+    else:
+        return render_template('admin_login.html')
+
+@app.route('/dashboard/admin', methods=['GET', 'POST'])
+def admin_dashboard():
+    if 'admin_username' in session:
+        username = session['admin_username']
+        return render_template('admin_dashboard.html', username=username)
+    else:
+        return redirect(url_for('admin_login'))
+
+@app.route('/dashboard/admin/all_users', methods=['GET', 'POST'])
+def all_users():
+    if 'admin_username' in session:
+        username = session['admin_username']
+        users = admin_model.get_Users()
+        return render_template('admin_all_users.html', users=users)
+    else:
+        return redirect(url_for('admin_dashboard'))
 
 if __name__ == '__main__':
     app.run(debug=True)

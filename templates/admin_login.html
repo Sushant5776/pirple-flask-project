@@ -1,0 +1,33 @@
+{% extends 'admin_structure.html' %}
+
+{% block head %}
+<title>Admin Login</title>
+{% endblock head %}
+
+{% block body %}
+<div class="container">
+    <br><br>
+    <h1 class="text-center display-4">Sign In</h1>
+    <br>
+    <p class="lead text-danger">
+        {{ message }}
+    </p>
+    <br>
+    <form action='/login/admin' method="POST">
+        <fieldset>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" class="form-control" placeholder="Username" required>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+            <a href="/" class="btn btn-primary btn-lg float-right">Cancel</a>
+        </fieldset>
+    </form>
+</div>
+{% endblock body %}

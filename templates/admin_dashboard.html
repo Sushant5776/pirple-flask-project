@@ -1,0 +1,19 @@
+{% extends 'admin_structure.html' %}
+
+{% block head %}
+<title>Admin {{ username }}</title>
+{% endblock head %}
+
+{% block body %}
+<div class="container">
+    <br>
+    <h1 class="display-4">Admin {{ username }}'s Dashboard</h1>
+    <br>
+    <div class="list-group list-group-flush">
+        <a href="/dashboard/admin/all_users" class="list-group-item list-group-item-action">All Users</a>
+        <a href="#" class="list-group-item list-group-item-action">Users in Last 1 Day</a>
+        <a href="#" class="list-group-item list-group-item-action">All Lists</a>
+        <a href="#" class="list-group-item list-group-item-action">Lists in Last 1 Day</a>
+    </div>
+</div>
+{% endblock body %}
