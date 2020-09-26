@@ -1,0 +1,20 @@
+{% extends 'structure.html' %}
+
+{% block head %}
+<title>{{ list_name }}</title>
+{% endblock head %}
+
+{% block body %}
+<div class="container">
+    <h1 class="header center">Edit List Name</h1>
+    <br>
+    <p class="text-flow light purple-text">{{ message }}</p>
+    <form action="/list/edit/{{ list_name }}" method="POST">
+        <label for="new_list_name" id="fontincrease">Enter Name:</label>
+        <input type="text" name="new_list_name" id="new_list_name" placeholder="New List Name" value="{{ list_name }}" required>
+        <br><br>
+        <input type="submit" value="Change List">
+        <a class="btn-large waves-effect waves-light green cancel" href="/dashboard">Go Back</a>
+    </form>
+</div>
+{% endblock body %}

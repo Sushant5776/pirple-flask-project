@@ -1,0 +1,25 @@
+{% extends 'structure.html' %}
+
+{% block head %}
+<title>{{ list_name }}</title>
+{% endblock head %}
+
+{% block body %}
+<div class="container">
+    <h1 class="header center">{{ list_name }}</h1>
+    <br>
+    <form action="/list/{{ list_name }}" method="POST">
+        <label for="new_item_name" id="fontincrease">Enter Item Name:</label>
+        <input type="text" name="itemname" id="new_item_name" placeholder="New Item Name">
+        <br><br>
+        <input type="submit" value="Add Item">
+        <a class="btn-large waves-effect waves-light green cancel" href="/dashboard">Go Back</a>
+    </form>
+    <br><br>
+    <ul class="collection" id="fontincrease">
+        {% for item in items %}
+        <li class="collection-item"><div>{{ item }}<div class="secondary-content"><a class="blue-text" href="/list/edit/{{ list_name }}/{{ item }}">Edit</a>&nbsp;&nbsp;<a class="red-text" href="/list/delete/{{ list_name }}/{{ item }}">Delete</a></div></div></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock body %}

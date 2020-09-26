@@ -1,0 +1,24 @@
+{% extends 'structure.html' %}
+
+{% block head %}
+<title>Sign Up</title>
+{% endblock head %}
+
+{% block body %}
+<div class="container">
+    <h1 class="header center">Sign Up</h1>
+    <br><br>
+    <p>{{ message }}</p>
+    <br>
+    <form action="/signup" method="POST">
+        <label for="username" id="fontincrease">Enter Username:</label>
+        <input type="text" name="username" placeholder="Username" id="username" required>
+        <br><br>
+        <label for="password" id="fontincrease">Enter Password:</label>
+        <input type="password" name="password" placeholder="Password" id="password" required>
+        <br><br><br>
+        <input type="submit" value="Sign Up">
+        <a class="btn-large waves-effect waves-light green cancel" href="/">Go Back</a>
+    </form>
+</div>
+{% endblock body %}

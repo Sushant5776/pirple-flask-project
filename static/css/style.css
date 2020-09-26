@@ -1,0 +1,38 @@
+input[type=submit] {
+    display: inline-block !important;
+    color: white !important;
+    height: 54px !important;
+    line-height: 54px !important;
+    border: 0 !important;
+    cursor: pointer;
+    font-size: 15px !important;
+    padding: 0 28px !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    background-color: #4CAF50 !important;
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14),0 1px 7px 0 rgba(0,0,0,0.12),0 3px 1px -1px rgba(0,0,0,0.2) !important;
+}
+
+.cancel {
+    float: right !important;
+}
+
+#sizeofabout {
+    height: 720px !important;
+}
+
+#lists h2 {
+    display: inline-flex;
+    justify-content: flex-start;
+}
+
+#lists a {
+    display: inline-flex;
+    justify-content: flex-end;
+    float: right;
+    margin-top: 37px;
+}
+
+#fontincrease {
+    font-size: 24px !important;
+}

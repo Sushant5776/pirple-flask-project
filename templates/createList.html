@@ -1,0 +1,20 @@
+{% extends 'structure.html' %}
+
+{% block head %}
+<title>New List</title>
+{% endblock head %}
+
+{% block body %}
+<div class="container">
+    <h1 class="header center">Create New List</h1>
+    <br>
+    <p class="text-flow light purple-text">{{ message }}</p>
+    <form action="/createList" method="POST">
+        <label for="list_name" id="fontincrease">Enter the name for your new list:</label>
+        <input type="text" name="list_name" id="list_name" placeholder="New List Name" required>
+        <br><br>
+        <input type="submit" value="Create List">
+        <a class="btn-large waves-effect waves-light green cancel" href="/dashboard">Go Back</a>
+    </form>
+</div>
+{% endblock body %}

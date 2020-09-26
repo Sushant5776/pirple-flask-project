@@ -1,0 +1,48 @@
+{% extends 'structure.html' %}
+
+{% block head %}
+<title>Home</title>
+{% endblock head %}
+
+{% block body %}
+<nav class="blue-grey darken-3" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">todo.com</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="/login">Sign In</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h1 class="header center teal-text">Welcome!</h1>
+    <div class="row center">
+        <h5 class="header col s12 light">A modern solution for daily tasks!</h5>
+      </div>
+    <img class="responsive-img" src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" width="100%" height="360px" alt="Main Image">
+    <p class="flow-text light">Everyone needs a todo list to perform their tasks on time without forgetting anything. This thing is quite a difficult task in today's congested world; So, we came up with our todo list service where you can access, update, create you lists anytime and from anywhere in the world. So, now forget about remembering anything here we are to handle your lists!</p>
+</div>
+<footer class="page-footer teal lighten-1">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">todo.com</h5>
+                <p class="grey-text text-lighten-4">Live in the moment!</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="/privacy">Privacy</a></li>
+                    <li><a class="grey-text text-lighten-3" href="/termsOfUse">Terms of Use</a></li>
+                    <li><a class="grey-text text-lighten-3" href="/about">About Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2020 Corona Pandemic
+        </div>
+    </div>
+</footer>
+
+{% endblock body %}
