@@ -27,13 +27,33 @@ def get_Users():
 def get_Lists():
     connection = sqlite3.connect('main.db', check_same_thread=False)
     cursor = connection.cursor()
-    cursor.execute("""SELECT listname FROM lists ORDER BY id;""")
+    cursor.execute("""SELECT listname, created_by FROM lists ORDER BY id;""")
     db_lists = cursor.fetchall()
-    lists = []
-    for i in range(len(db_lists)):
-        list_ = db_lists[i][0]
-        lists.append(list_)
     connection.commit()
     cursor.close()
     connection.close()
-    return lists
+    return db_lists
+
+def getList24():
+    connection = sqlite3.connect('main.db', check_same_thread=False)
+    cursor = connection.cursor()
+    cursor.execute("""SELECT listname, created_by FROM lists WHERE created_on > datetime('now', 'localtime', '-1 day') ORDER BY created_on DESC;""")
+    db_lists = cursor.fetchall()
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return db_lists
+
+def getUsers24():
+    connection = sqlite3.connect('main.db', check_same_thread=False)
+    cursor = connection.cursor()
+    cursor.execute("""SELECT username FROM users WHERE reg_date > datetime('now', 'localtime', '-1 day') ORDER BY reg_date DESC;""")
+    db_users = cursor.fetchall()
+    users = []
+    for i in range(len(db_users)):
+        user = db_users[i][0]
+        users.append(user)
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return users

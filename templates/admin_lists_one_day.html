@@ -1,7 +1,7 @@
 {% extends 'admin_structure.html' %}
 
 {% block head %}
-<title>All Lists</title>
+<title>Lists in 24 Hours</title>
 {% endblock head %}
 
 {% block body %}
@@ -20,12 +20,16 @@
 </nav>
 <div class="container">
     <br>
-    <h1 class="display-4">All Lists</h1>
+    <h1 class="display-4">Lists in Last 1 Day</h1>
     <br><br>
     <ul class="list-group">
+        {% if message %}
+        <li style="font-size: 20px;" class="list-group-item d-flex justify-content-between align-items-center">{{ message }}</li>
+        {% else %}
         {% for list_ in lists %}
         <li style="font-size: 20px;" class="list-group-item d-flex justify-content-between align-items-center">{{ list_[0] }}<small class="text-muted">By {{ list_[1]}}</small></li>
         {% endfor %}
+        {% endif %}
       </ul>
 </div>
 {% endblock body %}

@@ -191,5 +191,27 @@ def all_lists():
     else:
         return redirect(url_for('admin_login'))
 
+@app.route('/dashboard/admin/lists_in_one_day', methods=['GET'])
+def lists_in_one_day():
+    if 'admin_username' in session:
+        lists = admin_model.getList24()
+        if not lists:
+            message = 'No list created in last 1 day!'
+            return render_template('admin_lists_one_day.html', message=lists)
+        else:
+            return render_template('admin_lists_one_day.html', lists=lists)
+    else:
+        return redirect(url_for('admin_login'))
+
+@app.route('/dashboard/admin/users_in_one_day', methods=['GET'])
+def users_in_one_day():
+    if 'admin_username' in session:
+        users = admin_model.getUsers24()
+        if not users:
+            message = 'No user registered in last 1 day!'
+            return render_template('admin_users_one_day.html', message=message)
+        else:
+            return render_template('admin_users_one_day.html', users=users)
+
 if __name__ == '__main__':
     app.run(debug=True)
