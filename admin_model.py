@@ -23,3 +23,17 @@ def get_Users():
     cursor.close()
     connection.close()
     return users
+
+def get_Lists():
+    connection = sqlite3.connect('main.db', check_same_thread=False)
+    cursor = connection.cursor()
+    cursor.execute("""SELECT listname FROM lists ORDER BY id;""")
+    db_lists = cursor.fetchall()
+    lists = []
+    for i in range(len(db_lists)):
+        list_ = db_lists[i][0]
+        lists.append(list_)
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return lists

@@ -1,19 +1,35 @@
 {% extends 'admin_structure.html' %}
 
 {% block head %}
-<title>Admin {{ username }}</title>
+<title>Admin {{ username }} - todo.com</title>
 {% endblock head %}
 
 {% block body %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <a class="navbar-brand" href="/dashboard/admin">Admin Panel</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <form class="form-inline mt-2 mt-md-0">
+            <a class="nav-link btn btn-danger" href="/logout/admin">Logout</a>
+        </form>
+    </div>
+</nav>
+
 <div class="container">
     <br>
     <h1 class="display-4">Admin {{ username }}'s Dashboard</h1>
+    <hr>
     <br>
     <div class="list-group list-group-flush">
-        <a href="/dashboard/admin/all_users" class="list-group-item list-group-item-action">All Users</a>
-        <a href="#" class="list-group-item list-group-item-action">Users in Last 1 Day</a>
-        <a href="#" class="list-group-item list-group-item-action">All Lists</a>
-        <a href="#" class="list-group-item list-group-item-action">Lists in Last 1 Day</a>
+        <h3><a href="/dashboard/admin/all_users" class="text-info list-group-item list-group-item-action">All Users</a>
+        </h3>
+        <h3><a href="#" class="text-info list-group-item list-group-item-action">Users in Last 1 Day</a></h3>
+        <h3><a href="/dashboard/admin/all_lists" class="text-info list-group-item list-group-item-action">All Lists</a></h3>
+        <h3><a href="#" class="text-info list-group-item list-group-item-action">Lists in Last 1 Day</a></h3>
     </div>
 </div>
 {% endblock body %}
