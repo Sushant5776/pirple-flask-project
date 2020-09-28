@@ -1,0 +1,5 @@
+Admin is at /login/admin
+Username: Sushant
+Password: 46EdBw9K2LRmDNMj
+
+Just for instructor
