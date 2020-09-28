@@ -57,3 +57,13 @@ def getUsers24():
     cursor.close()
     connection.close()
     return users
+
+def delete_user_admin(user_name):
+    connection = sqlite3.connect('main.db', check_same_thread=False)
+    cursor = connection.cursor()
+    cursor.execute("""DELETE FROM listitems WHERE created_by LIKE '{user_name}';""".format(user_name=user_name))
+    cursor.execute("""DELETE FROM lists WHERE created_by LIKE '{user_name}';""".format(user_name=user_name))
+    cursor.execute("""DELETE FROM users WHERE username LIKE '{user_name}';""".format(user_name=user_name))
+    connection.commit()
+    cursor.close()
+    connection.close()

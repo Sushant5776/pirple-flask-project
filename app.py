@@ -213,5 +213,13 @@ def users_in_one_day():
         else:
             return render_template('admin_users_one_day.html', users=users)
 
+@app.route('/dashboard/admin/<string:from_type>/<string:user_name>', methods=['GET'])
+def delete_user_admin(from_type, user_name):
+    if 'admin_username' in session:
+        admin_model.delete_user_admin(user_name)
+        return redirect('/dashboard/admin/{from_type}'.format(from_type=from_type))
+    else:
+        return redirect(url_for('admin_login'))
+
 if __name__ == '__main__':
     app.run(debug=True)
