@@ -155,7 +155,8 @@ def editList(list_name):
         new_list_name_for_database = new_list_name.replace("'", "''")
         model.editList(list_name_for_database, new_list_name_for_database, username)
         return redirect(url_for('dashboard'))
-    return render_template('editList.html', list_name=list_name_for_database)
+    else:
+        return render_template('editList.html', list_name=list_name)
 
 @app.route('/list/edit/<string:list_name>/<string:item_name>', methods=['GET', 'POST'])
 def editItem(list_name, item_name):
