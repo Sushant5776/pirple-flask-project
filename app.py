@@ -44,8 +44,13 @@ def signup():
         if request.method == 'POST':
             username = request.form['username']
             password = request.form['password']
-            message = model.signup(username, password)
-            return render_template('signup.html', message=message)
+            password = password.replace("'", "''")
+            if "'" in username or '"' in username:
+                error_message = 'Username is not allowed! Try yourname123, something_me, etc.'
+                return render_template('signup.html', message=error_message)
+            else:
+                message = model.signup(username, password)
+                return render_template('signup.html', message=message)
         else:
             return render_template('signup.html')
 
@@ -54,8 +59,11 @@ def login():
     if request.method == 'POST':
         session.pop('username', None)
         username = request.form['username']
+        password_form = request.form['password']
+        username = username.replace("'", "''")
+        password_form = password_form.replace("'", "''")
         password = model.check_passwd(username)
-        if request.form['password'] == password:
+        if password_form == password:
             session['username'] = request.form['username']
             return redirect(url_for('dashboard'))
         else:
@@ -94,6 +102,7 @@ def createList():
     if 'username' in session:
         if request.method == 'POST':
             list_name = request.form['list_name']
+            list_name = list_name.replace("'", "''")
             username = session['username']
             message = model.createList(list_name, username)
             return render_template('createList.html', message=message)
@@ -105,11 +114,13 @@ def createList():
 @app.route('/list/<string:list_name>', methods=['GET', 'POST'])
 def list_(list_name):
     if 'username' in session:
-        items = model.getItems(list_name)
+        list_name_for_database = list_name.replace("'", "''")
+        items = model.getItems(list_name_for_database)
         if request.method == 'POST':
             created_by = session['username']
-            created_for = list_name
+            created_for = list_name_for_database
             itemname = request.form['itemname']
+            itemname = itemname.replace("'", "''")
             model.addItem(created_for, itemname, created_by)
             return redirect('/list/{list_name}'.format(list_name=list_name))
         else:
@@ -121,7 +132,8 @@ def list_(list_name):
 def deleteList(list_name):
     if 'username' in session:
         username = session['username']
-        model.deleteList(list_name, username)
+        list_name_for_database = list_name.replace("'", "''")
+        model.deleteList(list_name_for_database, username)
         return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('login'))
@@ -129,24 +141,31 @@ def deleteList(list_name):
 @app.route('/list/delete/<string:list_name>/<string:item_name>', methods=['GET'])
 def deleteItem(list_name, item_name):
     username = session['username']
-    model.deleteItem(list_name, item_name, username)
+    list_name_for_database = list_name.replace("'", "''")
+    item_name_for_database = item_name.replace("'", "''")
+    model.deleteItem(list_name_for_database, item_name_for_database, username)
     return redirect('/list/{list_name}'.format(list_name=list_name))
 
 @app.route('/list/edit/<string:list_name>', methods=['GET', 'POST'])
 def editList(list_name):
+    list_name_for_database = list_name.replace("'", "''")
     if request.method == 'POST':
         username = session['username']
         new_list_name = request.form['new_list_name']
-        model.editList(list_name, new_list_name, username)
+        new_list_name_for_database = new_list_name.replace("'", "''")
+        model.editList(list_name_for_database, new_list_name_for_database, username)
         return redirect(url_for('dashboard'))
-    return render_template('editList.html', list_name=list_name)
+    return render_template('editList.html', list_name=list_name_for_database)
 
 @app.route('/list/edit/<string:list_name>/<string:item_name>', methods=['GET', 'POST'])
 def editItem(list_name, item_name):
     if request.method == 'POST':
         username = session['username']
         new_item_name = request.form['new_item_name']
-        model.editItem(item_name, new_item_name, list_name, username)
+        list_name_for_database = list_name.replace("'", "''")
+        new_item_name = new_item_name.replace("'", "''")
+        item_name = item_name.replace("'", "''")
+        model.editItem(item_name, new_item_name, list_name_for_database, username)
         return redirect('/list/{list_name}'.format(list_name=list_name))
     return render_template('editItem.html', list_name=list_name, item_name=item_name)
 
@@ -156,10 +175,13 @@ def admin_login():
         return redirect(url_for('admin_dashboard'))
     else:
         if request.method == 'POST':
-            session.pop('admin_username', None)
             username = request.form['username']
+            password_form = request.form['password']
+            username = username.replace("'", "''")
+            password_form = password_form.replace("'", "''")
+            session.pop('admin_username', None)
             password = admin_model.check_passwd(username)
-            if request.form['password'] == password:
+            if password_form == password:
                 session['admin_username'] = request.form['username']
                 return redirect(url_for('admin_dashboard'))
             else:

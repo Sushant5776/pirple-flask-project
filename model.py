@@ -4,11 +4,18 @@ def check_passwd(username):
     connection = sqlite3.connect('main.db', check_same_thread=False)
     cursor = connection.cursor()
     cursor.execute("""SELECT password FROM users WHERE username LIKE '{username}';""".format(username=username))
-    passwd = cursor.fetchone()[0]
-    connection.commit()
-    cursor.close()
-    connection.close()
-    return passwd
+    passwd = cursor.fetchone()
+    if passwd is None:
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return passwd
+    else:
+        passwd = passwd[0]
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return passwd
 
 def check_users():
     connection = sqlite3.connect('main.db', check_same_thread=False)
