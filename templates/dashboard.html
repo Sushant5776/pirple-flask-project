@@ -6,23 +6,25 @@
 
 {% block body %}
 <nav class="blue-grey darken-3" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">todo.com</a>
-        <ul class="right hide-on-med-and-down">
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left">todo.com</a>
+        <ul class="right">
             <li><a href="/logout">Logout</a></li>
         </ul>
     </div>
 </nav>
 <div class="container">
     <h1>Welcome, {{ username }}!</h1>
-    <div id="lists">
+    <div id="lists" class="mobile">
         <h2>Your Lists</h2>
-        <a class="btn-large" href="/createList">Create New List</a>
+        <a class="btn-large" href="/createList">New List</a>
     </div>
     <br>
-    <ul class="collection" id="fontincrease">
-        {% for i in lists %}
-        <li class="collection-item"><div><a href="/list/{{ i }}">{{ i }}</a><div class="secondary-content"><a class="blue-text" href="/list/edit/{{ i }}">Edit</a>&nbsp;&nbsp;<a class="red-text" href="/list/delete/{{ i }}">Delete</a></div></div></li>
-        {% endfor %}
-    </ul>
+    <div>
+        <ul class="collection" id="fontincrease">
+            {% for i in lists %}
+            <li class="collection-item"><div><a href="/list/{{ i }}">{{ i }}</a><div class="secondary-content"><a class="blue-text" href="/list/edit/{{ i }}">Edit</a>&nbsp;&nbsp;<a class="red-text" href="/list/delete/{{ i }}">Delete</a></div></div></li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock body %}
