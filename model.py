@@ -171,3 +171,13 @@ def totalItems(list_name):
     cursor.close()
     connnection.close()
     return db_totalItems
+
+def delete_user(user_name):
+    connection = sqlite3.connect('main.db', check_same_thread=False)
+    cursor = connection.cursor()
+    cursor.execute("""DELETE FROM listitems WHERE created_by LIKE '{user_name}';""".format(user_name=user_name))
+    cursor.execute("""DELETE FROM lists WHERE created_by LIKE '{user_name}';""".format(user_name=user_name))
+    cursor.execute("""DELETE FROM users WHERE username LIKE '{user_name}';""".format(user_name=user_name))
+    connection.commit()
+    cursor.close()
+    connection.close()

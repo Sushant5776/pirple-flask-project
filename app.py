@@ -251,5 +251,11 @@ def delete_user_admin(from_type, user_name):
     else:
         return redirect(url_for('admin_login'))
 
+@app.route('/dashboard/delete/myself/<string:username>', methods=['GET'])
+def delete_self(username):
+    model.delete_user(username)
+    session.pop('username', None)
+    return redirect(url_for('signup'))
+
 if __name__ == '__main__':
     app.run(debug=True)

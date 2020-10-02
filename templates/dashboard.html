@@ -10,6 +10,7 @@
         <ul class="right">
             <li><a href="/createList">New List</a></li>
             <li><a href="/logout">Logout</a></li>
+            <li><a class="red-text" href="/dashboard/delete/myself/{{ username }}">Delete Account</a></li>
         </ul>
     </div>
 </nav>
@@ -17,7 +18,7 @@
     <h1>Welcome, {{ username }}!</h1>
     <div id="lists" class="mobile">
         <h2>Your Lists</h2>
-        <p class="grey-text lighten-1" style="font-size: 150%;">Total: {{ total }}</p>
+        <p class="grey-text" style="font-size: 150%;">Total: {{ total }}</p>
     </div>
     <div>
         <ul class="collection" id="fontincrease">
