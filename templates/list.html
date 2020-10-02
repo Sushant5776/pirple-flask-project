@@ -15,7 +15,7 @@
         <input type="submit" value="Add Item">
         <a class="btn-large waves-effect waves-light green cancel" href="/dashboard">Go Back</a>
     </form>
-    <br><br>
+    <p class="grey-text lighten-1" style="font-size: 150%;">Total: {{ total }}</p>
     <ul class="collection" id="fontincrease">
         {% for item in items %}
         <li class="collection-item"><div>{{ item }}<div class="secondary-content"><a class="blue-text" href="/list/edit/{{ list_name }}/{{ item }}">Edit</a>&nbsp;&nbsp;<a class="red-text" href="/list/delete/{{ list_name }}/{{ item }}">Delete</a></div></div></li>

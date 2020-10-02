@@ -49,8 +49,4 @@ input[type=submit] {
     .mobile > h2 {
         font-size: 36px !important;
     }
-
-    .mobile > a {
-        float: right !important;
-    }
 }

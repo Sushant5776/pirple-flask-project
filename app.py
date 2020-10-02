@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for, session, g
+from flask import Flask, render_template, request, redirect, url_for, session, g, send_from_directory
 import model, admin_model
+import os
 
 app = Flask(__name__)
 app.secret_key = 'keepitsecret'
@@ -23,6 +24,10 @@ def index():
         g.user=session['username']
         return render_template('dashboard.html')
     return render_template('index.html')
+
+@app.route('/favicon.ico', methods=['GET'])
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico')
 
 @app.route('/termsOfUse', methods=['GET'])
 def termsOfUse():
@@ -77,7 +82,8 @@ def dashboard():
     if 'username' in session:
         username = session['username']
         lists = model.getList(username)
-        return render_template('dashboard.html', username=username, lists=lists)
+        total = model.totalList(username)
+        return render_template('dashboard.html', username=username, lists=lists, total=total)
     else:
         return redirect(url_for('login'))
 
@@ -116,6 +122,7 @@ def list_(list_name):
     if 'username' in session:
         list_name_for_database = list_name.replace("'", "''")
         items = model.getItems(list_name_for_database)
+        total = model.totalItems(list_name_for_database)
         if request.method == 'POST':
             created_by = session['username']
             created_for = list_name_for_database
@@ -124,7 +131,7 @@ def list_(list_name):
             model.addItem(created_for, itemname, created_by)
             return redirect('/list/{list_name}'.format(list_name=list_name))
         else:
-            return render_template('list.html', list_name=list_name, items=items)
+            return render_template('list.html', list_name=list_name, items=items, total=total)
     else:
         return redirect(url_for('login'))
 
@@ -245,4 +252,4 @@ def delete_user_admin(from_type, user_name):
         return redirect(url_for('admin_login'))
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=7000, debug=True)
+    app.run(debug=True)

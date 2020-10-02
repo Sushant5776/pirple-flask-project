@@ -8,6 +8,7 @@
 <nav class="blue-grey darken-3" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left">todo.com</a>
         <ul class="right">
+            <li><a href="/createList">New List</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>
     </div>
@@ -16,9 +17,8 @@
     <h1>Welcome, {{ username }}!</h1>
     <div id="lists" class="mobile">
         <h2>Your Lists</h2>
-        <a class="btn-large" href="/createList">New List</a>
+        <p class="grey-text lighten-1" style="font-size: 150%;">Total: {{ total }}</p>
     </div>
-    <br>
     <div>
         <ul class="collection" id="fontincrease">
             {% for i in lists %}

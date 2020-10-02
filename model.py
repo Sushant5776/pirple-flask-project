@@ -151,3 +151,23 @@ def editItem(old_item_name, new_item_name, list_name, username):
     connection.commit()
     cursor.close()
     connection.close()
+
+def totalList(username):
+    connnection = sqlite3.connect('main.db', check_same_thread=False)
+    cursor = connnection.cursor()
+    cursor.execute("""SELECT COUNT(listname) FROM lists WHERE created_by LIKE '{username}';""".format(username=username))
+    db_totalLists = cursor.fetchone()[0]
+    connnection.commit()
+    cursor.close()
+    connnection.close()
+    return db_totalLists
+
+def totalItems(list_name):
+    connnection = sqlite3.connect('main.db', check_same_thread=False)
+    cursor = connnection.cursor()
+    cursor.execute("""SELECT COUNT(itemname) FROM listitems WHERE created_for LIKE '{list_name}';""".format(list_name=list_name))
+    db_totalItems = cursor.fetchone()[0]
+    connnection.commit()
+    cursor.close()
+    connnection.close()
+    return db_totalItems
