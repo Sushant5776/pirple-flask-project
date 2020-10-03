@@ -5,6 +5,13 @@
 {% endblock head %}
 
 {% block body %}
+<nav class="blue-grey darken-3" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left">todo.com</a>
+        <ul class="right">
+            <li><a href="/list/delete/items/{{ list_name }}">Clear List</a></li>
+        </ul>
+    </div>
+</nav>
 <div class="container">
     <h1 class="header center">{{ list_name }}</h1>
     <br>

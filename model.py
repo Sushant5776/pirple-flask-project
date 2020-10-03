@@ -181,3 +181,11 @@ def delete_user(user_name):
     connection.commit()
     cursor.close()
     connection.close()
+
+def clearList(list_name):
+    connection = sqlite3.connect('main.db', check_same_thread=False)
+    cursor = connection.cursor()
+    cursor.execute("""DELETE FROM listitems WHERE created_for LIKE '{list_name}';""".format(list_name=list_name))
+    connection.commit()
+    cursor.close()
+    connection.close()

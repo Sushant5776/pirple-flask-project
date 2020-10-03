@@ -135,6 +135,15 @@ def list_(list_name):
     else:
         return redirect(url_for('login'))
 
+@app.route('/list/delete/items/<string:list_name>', methods=['GET'])
+def clearList(list_name):
+    if 'username' in session:
+        list_name_for_database = list_name.replace("'", "''")
+        model.clearList(list_name_for_database)
+        return redirect('/list/{list_name}'.format(list_name=list_name))
+    else:
+        return redirect(url_for('login'))
+
 @app.route('/list/delete/<string:list_name>', methods=['GET'])
 def deleteList(list_name):
     if 'username' in session:
