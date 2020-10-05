@@ -1,0 +1,5 @@
+1. User can delete their account themselves
+2. Now user will see date of creation of list/item
+3. User can clear the entire list in one click using "Clear List" option
+4. User has ability to submit concern on support forum
+5. Total count of lists/items is also available on dashboard
