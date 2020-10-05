@@ -22,7 +22,7 @@ def before_request():
 def index():
     if 'username' in session:
         g.user=session['username']
-        return render_template('dashboard.html')
+        return redirect('dashboard')
     return render_template('index.html')
 
 @app.route('/favicon.ico', methods=['GET'])

@@ -37,6 +37,10 @@ input[type=submit] {
     font-size: 24px !important;
 }
 
+#date {
+    font-size: 14px !important;
+}
+
 @media only screen and (max-width:500px) {
     #fontincrease {
         font-size: 20px !important;
@@ -48,5 +52,9 @@ input[type=submit] {
 
     .mobile > h2 {
         font-size: 36px !important;
+    }
+
+    #date {
+        font-size: 12px !important;
     }
 }

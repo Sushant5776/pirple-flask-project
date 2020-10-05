@@ -23,7 +23,7 @@
     <div>
         <ul class="collection" id="fontincrease">
             {% for i in lists %}
-            <li class="collection-item"><div><a href="/list/{{ i }}">{{ i }}</a><div class="secondary-content"><a class="blue-text" href="/list/edit/{{ i }}">Edit</a>&nbsp;&nbsp;<a class="red-text" href="/list/delete/{{ i }}">Delete</a></div></div></li>
+            <li class="collection-item"><div><a href="/list/{{ i }}">{{ i }}&nbsp;&nbsp;<small class="grey-text" id="date">{{ lists[i] }}</small></a><div class="secondary-content"><a class="blue-text" href="/list/edit/{{ i }}">Edit</a>&nbsp;&nbsp;<a class="red-text" href="/list/delete/{{ i }}">Delete</a></div></div></li>
             {% endfor %}
         </ul>
     </div>

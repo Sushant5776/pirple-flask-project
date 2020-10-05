@@ -72,18 +72,19 @@ def createList(listname, created_by):
 def getList(username):
     connection = sqlite3.connect('main.db', check_same_thread=False)
     cursor = connection.cursor()
-    cursor.execute("""SELECT listname FROM lists WHERE created_by LIKE '{username}' ORDER BY created_on DESC;""".format(username=username))
+    cursor.execute("""SELECT listname, created_on FROM lists WHERE created_by LIKE '{username}' ORDER BY created_on DESC;""".format(username=username))
     db_lists = cursor.fetchall()
-    lists  = []
-    for i in range(len(db_lists)):
-        list_name = db_lists[i][0]
-        lists.append(list_name)
     connection.commit()
     cursor.close()
     connection.close()
     if db_lists is None:
         pass
     else:
+        lists = {}
+        for i in range(len(db_lists)):
+            lists_key = db_lists[i][0]
+            lists_value = db_lists[i][1]
+            lists[lists_key] = lists_value
         return lists
 
 def addItem(listname, itemname, username):
@@ -104,18 +105,19 @@ def addItem(listname, itemname, username):
 def getItems(list_name):
     connection = sqlite3.connect('main.db', check_same_thread=False)
     cursor = connection.cursor()
-    cursor.execute("""SELECT itemname FROM listitems WHERE created_for LIKE '{list_name}';""".format(list_name=list_name))
+    cursor.execute("""SELECT itemname, created_on FROM listitems WHERE created_for LIKE '{list_name}';""".format(list_name=list_name))
     db_items = cursor.fetchall()
-    items = []
-    for i in range(len(db_items)):
-        item = db_items[i][0]
-        items.append(item)
     connection.commit()
     cursor.close()
     connection.close()
     if db_items is None:
         pass
     else:
+        items = {}
+        for i in range(len(db_items)):
+            items_key = db_items[i][0]
+            items_value = db_items[i][1]
+            items[items_key] = items_value
         return items
 
 def deleteList(listname, username):
