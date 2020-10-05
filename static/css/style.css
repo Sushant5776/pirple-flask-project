@@ -41,6 +41,12 @@ input[type=submit] {
     font-size: 14px !important;
 }
 
+#concern {
+    white-space: pre-wrap !important;
+    display: block;
+    height: 200px;
+}
+
 @media only screen and (max-width:500px) {
     #fontincrease {
         font-size: 20px !important;

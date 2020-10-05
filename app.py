@@ -266,5 +266,21 @@ def delete_self(username):
     session.pop('username', None)
     return redirect(url_for('signup'))
 
+@app.route('/dashboard/raiseConcern', methods=['GET', 'POST'])
+def concern():
+    if 'username' in session:
+        if request.method == 'POST':
+            username = session['username']
+            subject = request.form['subject']
+            concern = request.form['concern']
+            subject_for_database = subject.replace("'", "''")
+            concern_for_database = concern.replace("'", "''")
+            message = model.concern(username, subject_for_database, concern_for_database)
+            return render_template('concern.html', message=message)
+        else:
+            return render_template('concern.html')
+    else:
+        return redirect(url_for('login'))
+
 if __name__ == '__main__':
     app.run(debug=True)

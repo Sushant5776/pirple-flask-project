@@ -191,3 +191,16 @@ def clearList(list_name):
     connection.commit()
     cursor.close()
     connection.close()
+
+def concern(username, subject, concern):
+    connection = sqlite3.connect('main.db', check_same_thread=False)
+    cursor = connection.cursor()
+    try:
+        cursor.execute("""INSERT INTO support(username, subject, concern) VALUES('{username}', '{subject}', '{concern}');""".format(username=username, subject=subject, concern=concern))
+        message = 'Concern is recorded successfully!'
+    except:
+        message = 'Something went wrong!'
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return message
